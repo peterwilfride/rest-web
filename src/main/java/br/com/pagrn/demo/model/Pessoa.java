@@ -1,5 +1,6 @@
 package br.com.pagrn.demo.model;
 
+import br.com.pagrn.demo.model.generic.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa {
+public class Pessoa extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Long id;
 
     String nome;
 
@@ -23,5 +24,8 @@ public class Pessoa {
 
     String telefones;
 
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
 }
