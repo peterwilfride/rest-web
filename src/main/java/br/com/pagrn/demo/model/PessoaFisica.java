@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity(name = "pessoa_fisica")
 @PrimaryKeyJoinColumn(name = "id")
-public class PessoaFisica extends Pessoa{
+public class PessoaFisica extends Pessoa {
 
     char sexo;
 
