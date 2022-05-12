@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
+/*
+* Entidade abstrata que declara apenas o id Long e um removed
+* Date, que é comum a todas as entidades
+* */
+
 @MappedSuperclass
 @Data
 @AllArgsConstructor
