@@ -24,6 +24,10 @@ public class Pessoa extends AbstractEntity {
 
     String telefones;
 
+    /*
+    * Muitas pessoas tem um único endereço, então Pessoa possui
+    * uma chave estrangeira para endereco, com nome endereco_id
+    * */
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;

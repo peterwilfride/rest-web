@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class AbstractController<E extends AbstractEntity, S extends AbstractService> implements GenericController {
+/*
+* Classe abstrata responsável por por declarar a instancia de um serviço
+* e implementar os métodos da interface abstrata fazendo os mapeamentos
+* de URL
+ */
+public abstract class AbstractController<E extends AbstractEntity, S extends AbstractService> implements GenericController<E> {
     protected final S service;
 
     public AbstractController(S service) {
@@ -22,8 +27,9 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Abs
 
     @Override
     @PostMapping
-    public E create(@RequestBody AbstractEntity entity) {
-        return (E) service.create(entity);
+    public ResponseEntity<E> create(@RequestBody E entity) {
+        service.create(entity);
+        return ResponseEntity.status(201).body(entity);
     }
 
     @Override
@@ -51,5 +57,4 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Abs
             return ResponseEntity.notFound().build();
         }
     }
-
 }
