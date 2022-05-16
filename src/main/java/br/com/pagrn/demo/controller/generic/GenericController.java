@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import br.com.pagrn.demo.model.generic.AbstractEntity;
 
 /*
-* Interface que contém apenas as assinaturas dos métodos a ser
+* Interface que cont�m apenas as assinaturas dos métodos a ser
 * implementados pela classe, passsando uma entidade abstrada como
 * argumento
 * */
