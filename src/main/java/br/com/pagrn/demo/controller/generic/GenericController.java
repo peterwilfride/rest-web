@@ -1,11 +1,10 @@
 package br.com.pagrn.demo.controller.generic;
 
-import br.com.pagrn.demo.model.generic.AbstractEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
+import br.com.pagrn.demo.model.generic.AbstractEntity;
 
 /*
 * Interface que contém apenas as assinaturas dos métodos a ser

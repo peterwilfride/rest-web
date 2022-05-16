@@ -1,7 +1,5 @@
 package br.com.pagrn.demo.service.generic;
 
-import br.com.pagrn.demo.model.generic.AbstractEntity;
-
 import java.util.List;
 import java.util.Optional;
 
