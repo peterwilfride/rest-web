@@ -26,7 +26,7 @@ public abstract class AbstractController<E extends AbstractEntity, S extends Abs
     }
 
     @Override
-    @PostMapping
+    @PostMapping    // E = pessoa
     public ResponseEntity<E> create(@RequestBody E entity) {
         service.create(entity);
         return ResponseEntity.status(201).body(entity);
