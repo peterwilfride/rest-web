@@ -1,5 +1,9 @@
 package br.com.pagrn.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -10,13 +14,16 @@ import java.util.List;
 
 @Entity(name = "pessoa_fisica")
 @PrimaryKeyJoinColumn(name = "id")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class PessoaFisica extends Pessoa {
 
-    char sexo;
+    Character sexo;
 
     String cpf;
 
-    Date data_nascumento;
+    Date data_nascimento;
 
     String tipo_sangue;
 

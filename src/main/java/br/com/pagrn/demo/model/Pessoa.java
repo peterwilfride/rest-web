@@ -18,11 +18,13 @@ public class Pessoa extends AbstractEntity {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     //Long id;
 
-    String nome;
+    private String nome;
 
-    String email;
+    private String email;
 
-    String telefones;
+    private String telefones;
+
+    private Boolean eh_pessoa_fisica;
 
     /*
     * Muitas pessoas tem um único endereço, então Pessoa possui
