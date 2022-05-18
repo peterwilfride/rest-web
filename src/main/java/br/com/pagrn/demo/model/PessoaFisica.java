@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,19 +16,27 @@ import java.util.List;
 @Data
 public class PessoaFisica extends Pessoa {
 
-    Character sexo;
+    private Character sexo;
 
-    String cpf;
+    private String cpf;
 
-    Date data_nascimento;
+    private Date data_nascimento;
 
-    String tipo_sangue;
+    private String tipo_sangue;
 
-    String nome_pai;
+    private String nome_pai;
 
-    String nome_mae;
+    private String nome_mae;
 
-    String foto;
+    private String foto;
+
+    /*
+     * Muitas pessoas tem um único endereço, então Pessoa possui
+     * uma chave estrangeira para endereco, com nome endereco_id
+     * */
+    @ManyToOne(fetch = FetchType.EAGER) //, cascade = CascadeType.ALL
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
     @OneToMany(mappedBy = "pessoa_fisica_id", fetch = FetchType.LAZY)
     public List<Servidor> servidores = new ArrayList<>();
