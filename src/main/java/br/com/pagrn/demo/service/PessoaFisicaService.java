@@ -36,7 +36,6 @@ public class PessoaFisicaService {
         return repository.findById(id);
     }*/
 
-    @Transactional
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 
         PessoaFisica pessoaFisica = new PessoaFisica();
@@ -63,20 +62,16 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
 
+        //System.out.println("ID = " + dto.getEndereco().getId());
+
         //endereco.addPessoaFisica(pessoaFisica);
 
-        //for (PessoaFisica x : endereco.pessoasFisicas) {
-        //    System.out.println(x);
-        //}
-
         enderecoRepository.save(endereco);
-
-        //Long id = dto.getEndereco().getId();
-
-        //enderecoRepository.saveAndFlush(endereco);
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
         return new PessoaFisicaDTO(pessoaFisica);
     }
+
+
 }
