@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,5 +46,6 @@ public class PessoaFisicaDTO {
         nome_pai = pessoaFisica.getNome_pai();
         nome_mae = pessoaFisica.getNome_mae();
         foto = pessoaFisica.getFoto();
+
     }
 }

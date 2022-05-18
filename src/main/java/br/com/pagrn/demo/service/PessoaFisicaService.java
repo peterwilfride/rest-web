@@ -7,8 +7,10 @@ import br.com.pagrn.demo.model.PessoaFisica;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
 import br.com.pagrn.demo.repository.PessoaRepository;
+import br.com.pagrn.demo.service.generic.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +36,9 @@ public class PessoaFisicaService {
         return repository.findById(id);
     }*/
 
+    @Transactional
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 
-        //Pessoa pessoa = new Pessoa();
         PessoaFisica pessoaFisica = new PessoaFisica();
         Endereco endereco = new Endereco();
 
@@ -61,7 +63,18 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
 
-        endereco = enderecoRepository.save(endereco);
+        //endereco.addPessoaFisica(pessoaFisica);
+
+        //for (PessoaFisica x : endereco.pessoasFisicas) {
+        //    System.out.println(x);
+        //}
+
+        enderecoRepository.save(endereco);
+
+        //Long id = dto.getEndereco().getId();
+
+        //enderecoRepository.saveAndFlush(endereco);
+
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
         return new PessoaFisicaDTO(pessoaFisica);

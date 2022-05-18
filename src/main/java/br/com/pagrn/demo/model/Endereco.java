@@ -35,16 +35,16 @@ public class Endereco extends AbstractEntity {
     * Um endereço tem muitas pessoas, ou seja, uma lista de Pessoas,
     * mapeada pelo atributo endereco da tabela pessoa
     * */
-    @OneToMany(mappedBy = "endereco", fetch = FetchType.LAZY, orphanRemoval = true)
-    public List<Pessoa> pessoas = new ArrayList<>();
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    public List<PessoaFisica> pessoasFisicas = new ArrayList<>();
 
-    public void addPessoa(Pessoa novaPessoa) {
-        pessoas.add(novaPessoa);
-        novaPessoa.setEndereco(this);
+    public void addPessoaFisica(PessoaFisica novaPessoaFisica) {
+        pessoasFisicas.add(novaPessoaFisica);
+        novaPessoaFisica.setEndereco(this);
     }
 
-    public void removePessoa(Pessoa removePessoa) {
-        pessoas.remove(removePessoa);
-        removePessoa.setEndereco(null);
+    public void removePessoaFisica(PessoaFisica novaPessoaFisica) {
+        pessoasFisicas.remove(novaPessoaFisica);
+        novaPessoaFisica.setEndereco(null);
     }
 }
