@@ -33,7 +33,6 @@ public class PessoaFisicaService {
         return repository.findById(id);
     }*/
 
-    @Transactional
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 
         PessoaFisica pessoaFisica = new PessoaFisica();
@@ -64,8 +63,6 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_pai(dto.getNome_pai());
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
-
-        //enderecoRepository.save(endereco);
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
