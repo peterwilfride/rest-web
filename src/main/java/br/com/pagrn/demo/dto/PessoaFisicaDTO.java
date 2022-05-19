@@ -1,14 +1,12 @@
 package br.com.pagrn.demo.dto;
 
 import br.com.pagrn.demo.model.Endereco;
-import br.com.pagrn.demo.model.Pessoa;
 import br.com.pagrn.demo.model.PessoaFisica;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

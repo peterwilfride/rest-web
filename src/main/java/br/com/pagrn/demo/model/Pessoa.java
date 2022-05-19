@@ -14,10 +14,6 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa extends AbstractEntity {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //Long id;
-
     private String nome;
 
     private String email;

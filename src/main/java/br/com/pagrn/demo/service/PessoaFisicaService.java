@@ -5,7 +5,6 @@ import br.com.pagrn.demo.model.Endereco;
 import br.com.pagrn.demo.model.PessoaFisica;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
-import br.com.pagrn.demo.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +31,7 @@ public class PessoaFisicaService {
     public Optional<PessoaFisica> findById(Long id) {
         return repository.findById(id);
     }*/
-
+    @Transactional
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 
         PessoaFisica pessoaFisica = new PessoaFisica();

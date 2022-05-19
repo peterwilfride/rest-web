@@ -5,15 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity(name = "pessoa_fisica")
 @PrimaryKeyJoinColumn(name = "id")
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@AllArgsConstructor // lombok para contrutor com todos os argumentos
+@NoArgsConstructor // lombok para contrutor sem argumentos
+@Data // lombok para geters  e seters 
 public class PessoaFisica extends Pessoa {
 
     private Character sexo;
