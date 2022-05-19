@@ -34,12 +34,13 @@ public class PessoaFisica extends Pessoa {
      * Muitas pessoas tem um único endereço, então Pessoa possui
      * uma chave estrangeira para endereco, com nome endereco_id
      * */
-    @ManyToOne(fetch = FetchType.EAGER) //, cascade = CascadeType.ALL
-    @JoinColumn(name = "endereco_id")
+    //@JoinColumn(name = "endereco_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(foreignKey = @ForeignKey(name = "endereco_id"), name = "endereco_id")
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "pessoa_fisica_id", fetch = FetchType.LAZY)
-    public List<Servidor> servidores = new ArrayList<>();
+    //@OneToMany(mappedBy = "pessoa_fisica_id", fetch = FetchType.LAZY)
+    //public List<Servidor> servidores = new ArrayList<>();
 
     /*
     public void addServidor(Servidor novoServidor) {

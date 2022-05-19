@@ -2,24 +2,21 @@ package br.com.pagrn.demo.service;
 
 import br.com.pagrn.demo.dto.PessoaFisicaDTO;
 import br.com.pagrn.demo.model.Endereco;
-import br.com.pagrn.demo.model.Pessoa;
 import br.com.pagrn.demo.model.PessoaFisica;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
 import br.com.pagrn.demo.repository.PessoaRepository;
-import br.com.pagrn.demo.service.generic.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PessoaFisicaService {
 
-    @Autowired
-    private PessoaRepository pessoaRepository;
+    //@Autowired
+    //private PessoaRepository pessoaRepository;
 
     @Autowired
     private PessoaFisicaRepository pessoaFisicaRepository;
@@ -27,11 +24,11 @@ public class PessoaFisicaService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    /*
     public List<PessoaFisica> findAll() {
-        return repository.findAll();
+        return pessoaFisicaRepository.findAll();
     }
 
+    /*
     public Optional<PessoaFisica> findById(Long id) {
         return repository.findById(id);
     }*/
@@ -39,7 +36,12 @@ public class PessoaFisicaService {
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 
         PessoaFisica pessoaFisica = new PessoaFisica();
-        Endereco endereco = new Endereco();
+
+        Endereco endereco = enderecoRepository.findById(dto.getEndereco().getId()).orElse(null);
+
+        if (endereco == null) {
+            endereco = new Endereco();
+        }
 
         pessoaFisica.setNome(dto.getNome());
         pessoaFisica.setEmail(dto.getEmail());
@@ -61,12 +63,6 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_pai(dto.getNome_pai());
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
-
-        //System.out.println("ID = " + dto.getEndereco().getId());
-
-        //endereco.addPessoaFisica(pessoaFisica);
-
-        enderecoRepository.save(endereco);
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
