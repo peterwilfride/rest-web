@@ -1,17 +1,23 @@
 package br.com.pagrn.demo.model;
 
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.Date;
-
-@Entity(name = "pessoa_fisica")
+@Entity(name = "pessoa_fisica") //especifica que essa classe será anotada como uma tabela do banco
 @PrimaryKeyJoinColumn(name = "id")
-@AllArgsConstructor // lombok para contrutor com todos os argumentos
-@NoArgsConstructor // lombok para contrutor sem argumentos
-@Data // lombok para geters  e seters 
+@AllArgsConstructor // lombok para cosntrutor com todos os atributos
+@NoArgsConstructor // lombok para construtor sem argumentos
+@Data // lombok para criar métodos getters, setters, hashCode e equals
 public class PessoaFisica extends Pessoa {
 
     private Character sexo;
