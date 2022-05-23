@@ -1,6 +1,7 @@
 package br.com.pagrn.demo.model;
 
 import br.com.pagrn.demo.model.generic.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,36 +16,34 @@ import java.util.List;
 @Data
 public class Endereco extends AbstractEntity {
 
-    //@Id
-    //@GeneratedValue
-    //Long id;
+    private Double latitude;
 
-    Double latitude;
+    private Double longitude;
 
-    Double longitude;
+    private Integer numero;
 
-    Integer numero;
+    private String complemento;
 
-    String complemento;
+    private String logradouro;
 
-    String logradouro;
-
-    String cep;
+    private String cep;
 
     /*
     * Um endereço tem muitas pessoas, ou seja, uma lista de Pessoas,
     * mapeada pelo atributo endereco da tabela pessoa
     * */
-    @OneToMany(mappedBy = "endereco", fetch = FetchType.LAZY, orphanRemoval = true)
-    public List<Pessoa> pessoas = new ArrayList<>();
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    public List<PessoaFisica> pessoasFisicas = new ArrayList<>();
 
-    public void addPessoa(Pessoa novaPessoa) {
-        pessoas.add(novaPessoa);
-        novaPessoa.setEndereco(this);
+    /*
+    public void addPessoaFisica(PessoaFisica novaPessoaFisica) {
+        pessoasFisicas.add(novaPessoaFisica);
+        novaPessoaFisica.setEndereco(this);
     }
 
-    public void removePessoa(Pessoa removePessoa) {
-        pessoas.remove(removePessoa);
-        removePessoa.setEndereco(null);
-    }
+    public void removePessoaFisica(PessoaFisica novaPessoaFisica) {
+        pessoasFisicas.remove(novaPessoaFisica);
+        novaPessoaFisica.setEndereco(null);
+    }*/
 }

@@ -1,7 +1,8 @@
 package br.com.pagrn.demo.repository;
 
-import br.com.pagrn.demo.model.PessoaJuridica;
-import br.com.pagrn.demo.repository.generic.GenericRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PessoaJuridicaRepository extends GenericRepository<PessoaJuridica> {
+import br.com.pagrn.demo.model.PessoaJuridica;
+
+public interface PessoaJuridicaRepository extends JpaRepository <PessoaJuridica, Long> {
 }

@@ -1,7 +1,9 @@
 package br.com.pagrn.demo.repository;
 
-import br.com.pagrn.demo.model.PessoaFisica;
-import br.com.pagrn.demo.repository.generic.GenericRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PessoaFisicaRepository extends GenericRepository<PessoaFisica> {
+import br.com.pagrn.demo.model.PessoaFisica;
+
+public interface PessoaFisicaRepository extends JpaRepository <PessoaFisica, Long> {
+   
 }

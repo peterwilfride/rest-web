@@ -1,7 +1,6 @@
 package br.com.pagrn.demo.dto;
 
 import br.com.pagrn.demo.model.Endereco;
-import br.com.pagrn.demo.model.Pessoa;
 import br.com.pagrn.demo.model.PessoaFisica;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,5 +44,6 @@ public class PessoaFisicaDTO {
         nome_pai = pessoaFisica.getNome_pai();
         nome_mae = pessoaFisica.getNome_mae();
         foto = pessoaFisica.getFoto();
+
     }
 }

@@ -1,40 +1,50 @@
 package br.com.pagrn.demo.model;
 
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-@Entity(name = "pessoa_fisica")
+@Entity(name = "pessoa_fisica") //especifica que essa classe será anotada como uma tabela do banco
 @PrimaryKeyJoinColumn(name = "id")
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@AllArgsConstructor // lombok para cosntrutor com todos os atributos
+@NoArgsConstructor // lombok para construtor sem argumentos
+@Data // lombok para criar métodos getters, setters, hashCode e equals
 public class PessoaFisica extends Pessoa {
 
-    Character sexo;
+    private Character sexo;
 
-    String cpf;
+    private String cpf;
 
-    Date data_nascimento;
+    private Date data_nascimento;
 
-    String tipo_sangue;
+    private String tipo_sangue;
 
-    String nome_pai;
+    private String nome_pai;
 
-    String nome_mae;
+    private String nome_mae;
 
-    String foto;
+    private String foto;
 
-    @OneToMany(mappedBy = "pessoa_fisica_id", fetch = FetchType.LAZY)
-    public List<Servidor> servidores = new ArrayList<>();
+    /*
+     * Muitas pessoas tem um único endereço, então Pessoa possui
+     * uma chave estrangeira para endereco, com nome endereco_id
+     * */
+    //@JoinColumn(name = "endereco_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(foreignKey = @ForeignKey(name = "endereco_id"), name = "endereco_id")
+    private Endereco endereco;
+
+    //@OneToMany(mappedBy = "pessoa_fisica_id", fetch = FetchType.LAZY)
+    //public List<Servidor> servidores = new ArrayList<>();
 
     /*
     public void addServidor(Servidor novoServidor) {

@@ -1,7 +1,10 @@
 package br.com.pagrn.demo.repository;
 
-import br.com.pagrn.demo.model.Endereco;
-import br.com.pagrn.demo.repository.generic.GenericRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EnderecoRepository extends GenericRepository<Endereco> {
+import br.com.pagrn.demo.model.Endereco;
+
+public interface EnderecoRepository extends JpaRepository <Endereco, Long>{
+
+
 }
