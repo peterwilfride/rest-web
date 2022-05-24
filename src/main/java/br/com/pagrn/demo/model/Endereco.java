@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,22 +17,22 @@ import java.util.List;
 @Data
 public class Endereco extends AbstractEntity {
 
-    @Column(nullable = false)
+    @NotNull
     private Double latitude;
 
-    @Column(nullable = false)
+    @NotNull
     private Double longitude;
 
-    @Column(nullable = false)
+    @NotNull
     private Integer numero;
 
-    @Column(length = 50, nullable = false)
+    @NotNull
     private String complemento;
 
-    @Column(nullable = false)
+    @NotNull
     private String logradouro;
 
-    @Column(length = 8, nullable = false)
+    @NotNull
     private String cep;
 
     /*
