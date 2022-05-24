@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Data
 public class Servidor extends AbstractEntity {
 
+    @Column(length = 20, nullable = false)
     Long matricula;
 
     String nome_social;

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pessoafisica")
@@ -20,6 +21,16 @@ public class PessoaFisicaController {
     public ResponseEntity<List<PessoaFisica>> listPessoasFisicas() {
         List<PessoaFisica> pessoaFisicas = service.findAll();
         return ResponseEntity.status(200).body(pessoaFisicas);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PessoaFisica> obterPessoaFisica(@PathVariable Long id) {
+        Optional<PessoaFisica> pessoaFisica = service.findById(id);
+        if (pessoaFisica.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(pessoaFisica.get());
+        }
     }
 
     @PostMapping

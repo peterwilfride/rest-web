@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PessoaFisicaService {
@@ -27,10 +28,10 @@ public class PessoaFisicaService {
         return pessoaFisicaRepository.findAll();
     }
 
-    /*
     public Optional<PessoaFisica> findById(Long id) {
-        return repository.findById(id);
-    }*/
+        return pessoaFisicaRepository.findById(id);
+    }
+
     @Transactional
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 

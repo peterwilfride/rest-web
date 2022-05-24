@@ -16,16 +16,22 @@ import java.util.List;
 @Data
 public class Endereco extends AbstractEntity {
 
+    @Column(nullable = false)
     private Double latitude;
 
+    @Column(nullable = false)
     private Double longitude;
 
+    @Column(nullable = false)
     private Integer numero;
 
+    @Column(length = 50, nullable = false)
     private String complemento;
 
+    @Column(nullable = false)
     private String logradouro;
 
+    @Column(length = 8, nullable = false)
     private String cep;
 
     /*
