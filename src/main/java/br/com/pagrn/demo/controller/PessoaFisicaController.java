@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class PessoaFisicaController {
     }
 
     @PostMapping
-    public ResponseEntity<PessoaFisicaDTO> savePessoaFisica(@RequestBody PessoaFisicaDTO dto) {
+    public ResponseEntity<PessoaFisicaDTO> savePessoaFisica(@Valid @RequestBody PessoaFisicaDTO dto) {
         PessoaFisicaDTO pessoaFisicaDTO = service.create(dto);
         return ResponseEntity.status(201).body(pessoaFisicaDTO);
         //return pessoaFisicaDTO;

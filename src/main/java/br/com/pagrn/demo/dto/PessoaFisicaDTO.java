@@ -2,16 +2,19 @@ package br.com.pagrn.demo.dto;
 
 import br.com.pagrn.demo.model.Endereco;
 import br.com.pagrn.demo.model.PessoaFisica;
+import br.com.pagrn.demo.model.Servidor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PessoaFisicaDTO {
+public class PessoaFisicaDTO implements Serializable {
 
     private Long id;
     private String nome;
@@ -27,6 +30,8 @@ public class PessoaFisicaDTO {
     private String nome_pai;
     private String nome_mae;
     private String foto;
+
+    private List<Servidor> servidores;
 
     public PessoaFisicaDTO(PessoaFisica pessoaFisica) {
         id = pessoaFisica.getId();
@@ -45,5 +50,6 @@ public class PessoaFisicaDTO {
         nome_mae = pessoaFisica.getNome_mae();
         foto = pessoaFisica.getFoto();
 
+        servidores = pessoaFisica.getServidores();
     }
 }

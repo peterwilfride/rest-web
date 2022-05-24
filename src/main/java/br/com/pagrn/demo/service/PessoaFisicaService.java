@@ -3,8 +3,10 @@ package br.com.pagrn.demo.service;
 import br.com.pagrn.demo.dto.PessoaFisicaDTO;
 import br.com.pagrn.demo.model.Endereco;
 import br.com.pagrn.demo.model.PessoaFisica;
+import br.com.pagrn.demo.model.Servidor;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
+import br.com.pagrn.demo.repository.ServidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +17,14 @@ import java.util.Optional;
 @Service
 public class PessoaFisicaService {
 
-    //@Autowired
-    //private PessoaRepository pessoaRepository;
-
     @Autowired
     private PessoaFisicaRepository pessoaFisicaRepository;
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private ServidorRepository servidorRepository;
 
     public List<PessoaFisica> findAll() {
         return pessoaFisicaRepository.findAll();
@@ -63,6 +65,15 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_pai(dto.getNome_pai());
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
+
+        List<Servidor> servidores = dto.getServidores();
+        for (Servidor s : servidores) {
+            Servidor servidor = new Servidor();
+            servidor.setMatricula(s.getMatricula());
+            servidor.setNome_social(s.getNome_social());
+            servidor.setPessoa_fisica_id(pessoaFisica);
+            servidor = servidorRepository.save(servidor);
+        }
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 

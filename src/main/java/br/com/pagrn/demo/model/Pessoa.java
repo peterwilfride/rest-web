@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity(name = "pessoa")
 @AllArgsConstructor
@@ -16,13 +18,15 @@ import javax.validation.constraints.NotBlank;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa extends AbstractEntity {
 
-    @Column(length = 100, nullable = false)
+    @NotNull
+    @Size(max = 100)
     @NotBlank(message = "O campo 'nome' deve ser informado.")
     private String nome;
 
-    @Column(length = 100, nullable = false)
-    @NotBlank(message = "O campo 'email' deve ser informado.")
+    @NotNull
+    @Size(max = 100)
     @Email
+    @NotBlank(message = "O campo 'email' deve ser informado.")
     private String email;
 
     private String telefones;
