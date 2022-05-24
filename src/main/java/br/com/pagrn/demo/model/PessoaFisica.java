@@ -2,12 +2,8 @@ package br.com.pagrn.demo.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,16 +16,25 @@ import lombok.NoArgsConstructor;
 @Data // lombok para criar métodos getters, setters, hashCode e equals
 public class PessoaFisica extends Pessoa {
 
+    @Column(nullable=false)
     private Character sexo;
 
+    @Column(length = 11, nullable = false)
+    @NotBlank(message = "O campo CPF deve ser informado.")
     private String cpf;
 
+    @Column(nullable = false)
     private Date data_nascimento;
 
+    @Column(nullable = false)
     private String tipo_sangue;
 
+    @Column(length = 100, nullable = false)
+    @NotBlank(message = "O campo 'nome do pai' deve ser informado.")
     private String nome_pai;
 
+    @Column(length = 100, nullable = false)
+    @NotBlank(message = "O campo 'nome da mãe' deve ser informado.")
     private String nome_mae;
 
     private String foto;
@@ -38,7 +43,6 @@ public class PessoaFisica extends Pessoa {
      * Muitas pessoas tem um único endereço, então Pessoa possui
      * uma chave estrangeira para endereco, com nome endereco_id
      * */
-    //@JoinColumn(name = "endereco_id")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "endereco_id"), name = "endereco_id")
     private Endereco endereco;
