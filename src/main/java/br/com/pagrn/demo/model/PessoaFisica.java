@@ -1,14 +1,11 @@
 package br.com.pagrn.demo.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,8 +53,24 @@ public class PessoaFisica extends Pessoa {
     @NotNull
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "pessoa_fisica_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pessoa_fisica_id",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("pessoa_fisica_id")
     public List<Servidor> servidores = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "pessoasfisicasdeficiencias",
+            joinColumns = { @JoinColumn(name = "pessoaFisica_id", referencedColumnName ="id") },
+            inverseJoinColumns = { @JoinColumn(name = "deficiencia_id",  referencedColumnName ="id") })
+    public Set<Deficiencia> deficiencias = new HashSet<>();
+
+    /*
+    * fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+    }
+    */
 }

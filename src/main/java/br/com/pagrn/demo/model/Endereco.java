@@ -43,14 +43,8 @@ public class Endereco extends AbstractEntity {
     @JsonIgnore
     public List<PessoaFisica> pessoasFisicas = new ArrayList<>();
 
-    /*
-    public void addPessoaFisica(PessoaFisica novaPessoaFisica) {
-        pessoasFisicas.add(novaPessoaFisica);
-        novaPessoaFisica.setEndereco(this);
-    }
 
-    public void removePessoaFisica(PessoaFisica novaPessoaFisica) {
-        pessoasFisicas.remove(novaPessoaFisica);
-        novaPessoaFisica.setEndereco(null);
-    }*/
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    public List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
 }

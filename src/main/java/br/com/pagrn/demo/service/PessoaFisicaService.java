@@ -1,9 +1,11 @@
 package br.com.pagrn.demo.service;
 
 import br.com.pagrn.demo.dto.PessoaFisicaDTO;
+import br.com.pagrn.demo.model.Deficiencia;
 import br.com.pagrn.demo.model.Endereco;
 import br.com.pagrn.demo.model.PessoaFisica;
 import br.com.pagrn.demo.model.Servidor;
+import br.com.pagrn.demo.repository.DeficienciaRepository;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
 import br.com.pagrn.demo.repository.ServidorRepository;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PessoaFisicaService {
@@ -25,6 +28,9 @@ public class PessoaFisicaService {
 
     @Autowired
     private ServidorRepository servidorRepository;
+
+    @Autowired
+    private DeficienciaRepository deficienciaRepository;
 
     public List<PessoaFisica> findAll() {
         return pessoaFisicaRepository.findAll();
@@ -41,6 +47,7 @@ public class PessoaFisicaService {
 
         Endereco endereco = enderecoRepository.findById(dto.getEndereco().getId()).orElse(null);
 
+        // fazer verificação pelos outros campos
         if (endereco == null) {
             endereco = new Endereco();
         }
@@ -74,6 +81,18 @@ public class PessoaFisicaService {
             servidor.setPessoa_fisica_id(pessoaFisica);
             servidor = servidorRepository.save(servidor);
         }
+        //pessoaFisica.setServidores(servidores);
+
+        Set<Deficiencia> deficiencias = dto.getDeficiencias();
+        System.out.println(deficiencias);
+        for (Deficiencia d : deficiencias) {
+            Deficiencia deficiencia = new Deficiencia();
+            deficiencia.setTipo(d.getTipo());
+            deficiencia.setDenominacao(d.getDenominacao());
+            deficiencia.getPessoaFisicas().add(pessoaFisica);
+            deficiencia = deficienciaRepository.save(deficiencia);
+        }
+        pessoaFisica.setDeficiencias(deficiencias);
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
