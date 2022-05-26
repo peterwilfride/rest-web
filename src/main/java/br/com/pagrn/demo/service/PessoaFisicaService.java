@@ -1,17 +1,15 @@
 package br.com.pagrn.demo.service;
 
 import br.com.pagrn.demo.dto.PessoaFisicaDTO;
-import br.com.pagrn.demo.model.Endereco;
-import br.com.pagrn.demo.model.PessoaFisica;
-import br.com.pagrn.demo.model.Servidor;
-import br.com.pagrn.demo.model.Vinculo;
-import br.com.pagrn.demo.repository.EnderecoRepository;
-import br.com.pagrn.demo.repository.PessoaFisicaRepository;
-import br.com.pagrn.demo.repository.ServidorRepository;
+import br.com.pagrn.demo.model.*;
+import br.com.pagrn.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +25,14 @@ public class PessoaFisicaService {
     @Autowired
     private ServidorRepository servidorRepository;
 
-    public List<PessoaFisica> findAll() {
-        return pessoaFisicaRepository.findAll();
+    @Autowired
+    private VinculoRepository vinculoRepository;
+
+    @Autowired
+    private DeficienciaRepository deficienciaRepository;
+
+    public Page<PessoaFisica> findAll(Pageable pageable) {
+        return pessoaFisicaRepository.findAll(pageable);
     }
 
     public Optional<PessoaFisica> findById(Long id) {
@@ -99,11 +103,41 @@ public class PessoaFisicaService {
         for(Servidor s : ss) {
             s.setPessoa_fisica_id(pessoaFisica);
             List<Vinculo> vv = s.getVinculos();
+
             for(Vinculo v : vv) {
                 v.setServidor_id(s);
             }
         }
 
         return pessoaFisicaRepository.save(pessoaFisica);
+    }
+
+    public void delete(PessoaFisica pessoaFisica) {
+
+        Date current_date = new Date();
+
+        pessoaFisica.setRemoved(current_date);
+        pessoaFisicaRepository.save(pessoaFisica);
+
+        Endereco e = pessoaFisica.getEndereco();
+        e.setRemoved(current_date);
+        enderecoRepository.save(e);
+
+        List<Deficiencia> dd = pessoaFisica.getDeficiencias();
+        for(Deficiencia d : dd) {
+            d.setRemoved(current_date);
+            deficienciaRepository.save(d);
+        }
+
+        List<Servidor> ss = pessoaFisica.getServidores();
+        for(Servidor s : ss) {
+            s.setRemoved(current_date);
+            servidorRepository.save(s);
+            List<Vinculo> vv = s.getVinculos();
+            for(Vinculo v : vv) {
+                v.setRemoved(current_date);
+                vinculoRepository.save(v);
+            }
+        }
     }
 }
