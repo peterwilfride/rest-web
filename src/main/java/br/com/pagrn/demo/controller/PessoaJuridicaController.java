@@ -38,9 +38,6 @@ public class PessoaJuridicaController {
     public ResponseEntity<PessoaJuridica> savePessoaJuridica(@Valid @RequestBody PessoaJuridicaDTO dto) {
         PessoaJuridica pessoaJuridica = dto.extractPessoaJuridica();
 
-        //PessoaJuridicaDTO pessoaJuridicaDTO = service.create(dto);
-        //return ResponseEntity.status(201).body(pessoaJuridicaDTO);
-
         PessoaJuridica pj = service.create(pessoaJuridica);
         return ResponseEntity.status(201).body(pj);
     }

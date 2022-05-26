@@ -21,6 +21,7 @@ public class PessoaFisicaController {
     @GetMapping
     public ResponseEntity<List<PessoaFisica>> listPessoasFisicas() {
         List<PessoaFisica> pessoaFisicas = service.findAll();
+        //System.out.println(pessoaFisicas.get(0).getServidores());
         return ResponseEntity.status(200).body(pessoaFisicas);
     }
 
@@ -37,9 +38,6 @@ public class PessoaFisicaController {
     @PostMapping
     public ResponseEntity<PessoaFisica> savePessoaFisica(@Valid @RequestBody PessoaFisicaDTO dto) {
         PessoaFisica pessoaFisica = dto.extractPessoaFisica();
-
-        //PessoaFisicaDTO pessoaFisicaDTO = service.create(dto);
-        //return ResponseEntity.status(201).body(pessoaFisicaDTO);
 
         PessoaFisica pf = service.create(pessoaFisica);
         return ResponseEntity.status(201).body(pf);

@@ -3,6 +3,8 @@ package br.com.pagrn.demo.service;
 import br.com.pagrn.demo.dto.PessoaFisicaDTO;
 import br.com.pagrn.demo.model.Endereco;
 import br.com.pagrn.demo.model.PessoaFisica;
+import br.com.pagrn.demo.model.Servidor;
+import br.com.pagrn.demo.model.Vinculo;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
 import br.com.pagrn.demo.repository.ServidorRepository;
@@ -91,6 +93,15 @@ public class PessoaFisicaService {
             endereco.setLogradouro(pe.getLogradouro());
             endereco.setCep(pe.getCep());
             pessoaFisica.setEndereco(endereco);
+        }
+
+        List<Servidor> ss = pessoaFisica.getServidores();
+        for(Servidor s : ss) {
+            s.setPessoa_fisica_id(pessoaFisica);
+            List<Vinculo> vv = s.getVinculos();
+            for(Vinculo v : vv) {
+                v.setServidor_id(s);
+            }
         }
 
         return pessoaFisicaRepository.save(pessoaFisica);
