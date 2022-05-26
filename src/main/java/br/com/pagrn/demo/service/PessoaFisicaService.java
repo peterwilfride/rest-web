@@ -9,6 +9,8 @@ import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
 import br.com.pagrn.demo.repository.ServidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +29,8 @@ public class PessoaFisicaService {
     @Autowired
     private ServidorRepository servidorRepository;
 
-    public List<PessoaFisica> findAll() {
-        return pessoaFisicaRepository.findAll();
+    public Page<PessoaFisica> findAll(Pageable pageable) {
+        return pessoaFisicaRepository.findAll(pageable);
     }
 
     public Optional<PessoaFisica> findById(Long id) {
@@ -99,6 +101,7 @@ public class PessoaFisicaService {
         for(Servidor s : ss) {
             s.setPessoa_fisica_id(pessoaFisica);
             List<Vinculo> vv = s.getVinculos();
+
             for(Vinculo v : vv) {
                 v.setServidor_id(s);
             }

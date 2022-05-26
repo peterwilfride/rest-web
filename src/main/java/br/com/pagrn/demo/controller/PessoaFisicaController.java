@@ -4,11 +4,13 @@ import br.com.pagrn.demo.dto.PessoaFisicaDTO;
 import br.com.pagrn.demo.model.PessoaFisica;
 import br.com.pagrn.demo.service.PessoaFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,10 +21,9 @@ public class PessoaFisicaController {
     private PessoaFisicaService service;
 
     @GetMapping
-    public ResponseEntity<List<PessoaFisica>> listPessoasFisicas() {
-        List<PessoaFisica> pessoaFisicas = service.findAll();
-        //System.out.println(pessoaFisicas.get(0).getServidores());
-        return ResponseEntity.status(200).body(pessoaFisicas);
+    @ResponseStatus(HttpStatus.OK)
+    public Page<PessoaFisica> listPessoasFisicas(Pageable pegeable) {
+        return service.findAll(pegeable);
     }
 
     @GetMapping(value = "/{id}")
