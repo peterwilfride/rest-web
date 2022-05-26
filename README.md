@@ -1,7 +1,7 @@
 # rest-web
 RepositÃ³rio para guardar a API REST do DER do "pagRN"
 
-# pendências
+# pendï¿½ncias
 [ ] Implementar entidade deficiente (vÃ¡rios / vÃ¡rios)
 [ ] controller advice
 [ ] converter os seters dentro de um DTO
@@ -10,26 +10,26 @@ RepositÃ³rio para guardar a API REST do DER do "pagRN"
 # SOLID
 [S - Single Responsibility Principle]
 - Cada classe deve ter apenas uma responsabilidade
-- Classes pequenas, menos complexas, de fácil manutenção e de utilização em diversos contextos (reuso)
-- Integridade conceitual (coesão)
+- Classes pequenas, menos complexas, de fÃ¡cil manutenÃ§Ã£o e de utilizaÃ§Ã£o em diversos contextos (reuso)
+- Integridade conceitual (coesÃ£o)
 - Separar responsabilidades de acordo com os diferentes interesses
 
 [O - Open/Closed Principle]
-- Uma classe deve ser aberta para extensão e fechada para modificação
-- Implementações preparadas para mudanças (novas extensões)
+- Uma classe deve ser aberta para extensÃ£o e fechada para modificaÃ§Ã£o
+- ImplementaÃ§Ãµes preparadas para mudanÃ§as (novas extensÃµes)
 
 [L - Liskov Substitution Principle]
 - Possibilidade de substituir a interface ou classe abstrata pela classe concreta
-- A subclasse não pode restringir ou violar princípios da superclasse
+- A subclasse nÃ£o pode restringir ou violar princÃ­pios da superclasse
 
 [I - Interface Segregation Principle]
-- Interfaces devem ser quebradas em especificações para atender clientes específicos
-- Classes não devem implementar funcionalidades desnecessárias de interfaces
-- Clientes não devem ser obrigados a implementarem métodos que não necessitam
+- Interfaces devem ser quebradas em especificaÃ§Ãµes para atender clientes especÃ­ficos
+- Classes nÃ£o devem implementar funcionalidades desnecessÃ¡rias de interfaces
+- Clientes nÃ£o devem ser obrigados a implementarem mÃ©todos que nÃ£o necessitam
 
 [D - Dependency Inversion Principle]
-- Classes não devem depender de implementações concretas, mas de abstrações (classes abstratas ou interfaces)
+- Classes nÃ£o devem depender de implementaÃ§Ãµes concretas, mas de abstraÃ§Ãµes (classes abstratas ou interfaces)
 - Garante fraco acoplamento e facilita a manutenibilidade e o reuso
-- Garante também o princípio OCP
+- Garante tambÃ©m o princÃ­pio OCP
 
 

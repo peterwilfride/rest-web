@@ -73,6 +73,7 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
 
+        /*
         List<Servidor> servidores = dto.getServidores();
         for (Servidor s : servidores) {
             Servidor servidor = new Servidor();
@@ -80,19 +81,19 @@ public class PessoaFisicaService {
             servidor.setNome_social(s.getNome_social());
             servidor.setPessoa_fisica_id(pessoaFisica);
             servidor = servidorRepository.save(servidor);
-        }
-        //pessoaFisica.setServidores(servidores);
+        }*/
+        pessoaFisica.setServidores(dto.getServidores());
 
-        Set<Deficiencia> deficiencias = dto.getDeficiencias();
-        System.out.println(deficiencias);
+        /*
+        List<Deficiencia> deficiencias = dto.getDeficiencias();
         for (Deficiencia d : deficiencias) {
             Deficiencia deficiencia = new Deficiencia();
             deficiencia.setTipo(d.getTipo());
             deficiencia.setDenominacao(d.getDenominacao());
-            deficiencia.getPessoaFisicas().add(pessoaFisica);
+            //deficiencia.getPessoaFisicas().add(pessoaFisica);
             deficiencia = deficienciaRepository.save(deficiencia);
-        }
-        pessoaFisica.setDeficiencias(deficiencias);
+        }*/
+        pessoaFisica.setDeficiencias(dto.getDeficiencias());
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
