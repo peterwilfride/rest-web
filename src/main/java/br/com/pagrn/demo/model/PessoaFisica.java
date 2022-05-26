@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity(name = "pessoa_fisica") //especifica que essa classe será anotada como uma tabela do banco
 @PrimaryKeyJoinColumn(name = "id")
@@ -60,9 +62,10 @@ public class PessoaFisica extends Pessoa {
     @JsonIgnoreProperties("pessoa_fisica_id")
     public List<Servidor> servidores = new ArrayList<>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "pessoasfisicas_deficiencias",
             joinColumns = { @JoinColumn(name = "pessoaFisica_id") },
             inverseJoinColumns = { @JoinColumn(name = "deficiencia_id") })
-    public List<Deficiencia> deficiencias;  // = new HashSet<>();
+    public List<Deficiencia> deficiencias;
 }

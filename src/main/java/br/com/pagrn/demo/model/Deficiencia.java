@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Deficiencia extends AbstractEntity {
 
     private String denominacao;
 
-    @ManyToMany(mappedBy="deficiencias")
+    @ManyToMany(mappedBy="deficiencias", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<PessoaFisica> pessoaFisicas;  // = new HashSet<>();
 }
