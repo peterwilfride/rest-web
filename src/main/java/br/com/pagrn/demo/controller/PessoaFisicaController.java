@@ -44,4 +44,13 @@ public class PessoaFisicaController {
         return ResponseEntity.status(201).body(pf);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deletePessoaFisica(@PathVariable Long id) {
+        Optional<PessoaFisica> pessoaFisica = service.findById(id);
+        return service.findById(id)
+                .map( record -> {
+                    service.delete(record);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
+    }
 }
