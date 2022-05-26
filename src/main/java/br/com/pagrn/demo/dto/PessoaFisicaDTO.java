@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,7 +34,7 @@ public class PessoaFisicaDTO implements Serializable {
 
     private List<Servidor> servidores;
 
-    private Set<Deficiencia> deficiencias;
+    private List<Deficiencia> deficiencias;
 
     public PessoaFisicaDTO(PessoaFisica pessoaFisica) {
         id = pessoaFisica.getId();

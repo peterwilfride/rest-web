@@ -60,17 +60,9 @@ public class PessoaFisica extends Pessoa {
     @JsonIgnoreProperties("pessoa_fisica_id")
     public List<Servidor> servidores = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "pessoasfisicasdeficiencias",
-            joinColumns = { @JoinColumn(name = "pessoaFisica_id", referencedColumnName ="id") },
-            inverseJoinColumns = { @JoinColumn(name = "deficiencia_id",  referencedColumnName ="id") })
-    public Set<Deficiencia> deficiencias = new HashSet<>();
-
-    /*
-    * fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-    }
-    */
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "pessoasfisicas_deficiencias",
+            joinColumns = { @JoinColumn(name = "pessoaFisica_id") },
+            inverseJoinColumns = { @JoinColumn(name = "deficiencia_id") })
+    public List<Deficiencia> deficiencias;  // = new HashSet<>();
 }
