@@ -2,6 +2,7 @@ package br.com.pagrn.demo.service;
 
 import br.com.pagrn.demo.dto.PessoaJuridicaDTO;
 import br.com.pagrn.demo.model.Endereco;
+import br.com.pagrn.demo.model.PessoaFisica;
 import br.com.pagrn.demo.model.PessoaJuridica;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaJuridicaRepository;
@@ -29,7 +30,7 @@ public class PessoaJuridicaService {
         return pessoaJuridicaRepository.findById(id);
     }
 
-    @Transactional
+    /*@Transactional
     public PessoaJuridicaDTO create(PessoaJuridicaDTO dto) {
 
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
@@ -44,7 +45,7 @@ public class PessoaJuridicaService {
         pessoaJuridica.setNome(dto.getNome());
         pessoaJuridica.setEmail(dto.getEmail());
         pessoaJuridica.setTelefones(dto.getTelefones());
-        pessoaJuridica.setEh_pessoa_fisica(dto.getEh_pessoa_fisica());
+        //pessoaJuridica.setEh_pessoa_fisica(dto.getEh_pessoa_fisica());
         pessoaJuridica.setEndereco(dto.getEndereco());
 
         endereco.setLatitude(dto.getEndereco().getLatitude());
@@ -61,5 +62,26 @@ public class PessoaJuridicaService {
         pessoaJuridica = pessoaJuridicaRepository.save(pessoaJuridica);
 
         return new PessoaJuridicaDTO(pessoaJuridica);
+    }*/
+
+    @Transactional
+    public PessoaJuridica create(PessoaJuridica pessoaJuridica) {
+
+        Endereco pe = pessoaJuridica.getEndereco();
+
+        Endereco endereco = enderecoRepository.findById(pe.getId()).orElse(null);
+
+        if (endereco == null) {
+            endereco = new Endereco();
+            endereco.setLatitude(pe.getLatitude());
+            endereco.setLongitude(pe.getLongitude());
+            endereco.setNumero(pe.getNumero());
+            endereco.setComplemento(pe.getComplemento());
+            endereco.setLogradouro(pe.getLogradouro());
+            endereco.setCep(pe.getCep());
+            pessoaJuridica.setEndereco(endereco);
+        }
+
+        return pessoaJuridicaRepository.save(pessoaJuridica);
     }
 }

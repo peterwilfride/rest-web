@@ -21,7 +21,7 @@ public class PessoaFisicaDTO implements Serializable {
     private String nome;
     private String email;
     private String telefones;
-    private Boolean eh_pessoa_fisica;
+    //private Boolean eh_pessoa_fisica;
     private Endereco endereco;
 
     private Character sexo;
@@ -41,7 +41,7 @@ public class PessoaFisicaDTO implements Serializable {
         nome = pessoaFisica.getNome();
         email = pessoaFisica.getEmail();
         telefones = pessoaFisica.getTelefones();
-        eh_pessoa_fisica = pessoaFisica.getEh_pessoa_fisica();
+        //eh_pessoa_fisica = pessoaFisica.getEh_pessoa_fisica();
 
         endereco = pessoaFisica.getEndereco();
 
@@ -56,5 +56,29 @@ public class PessoaFisicaDTO implements Serializable {
         servidores = pessoaFisica.getServidores();
 
         deficiencias = pessoaFisica.getDeficiencias();
+    }
+
+    public PessoaFisica extractPessoaFisica() {
+        PessoaFisica pessoaFisica = new PessoaFisica();
+
+        pessoaFisica.setNome(this.getNome());
+        pessoaFisica.setEmail(this.getEmail());
+        pessoaFisica.setTelefones(this.getTelefones());
+
+        pessoaFisica.setEndereco(this.getEndereco());
+
+        pessoaFisica.setSexo(this.getSexo());
+        pessoaFisica.setCpf(this.getCpf());
+        pessoaFisica.setTipo_sangue(this.getTipo_sangue());
+        pessoaFisica.setData_nascimento(this.getData_nascimento());
+        pessoaFisica.setNome_pai(this.getNome_pai());
+        pessoaFisica.setNome_mae(this.getNome_mae());
+        pessoaFisica.setFoto(this.getFoto());
+
+        pessoaFisica.setServidores(this.getServidores());
+
+        pessoaFisica.setDeficiencias(this.getDeficiencias());
+
+        return pessoaFisica;
     }
 }

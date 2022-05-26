@@ -35,8 +35,13 @@ public class PessoaJuridicaController {
     }
 
     @PostMapping
-    public ResponseEntity<PessoaJuridicaDTO> savePessoaJuridica(@Valid @RequestBody PessoaJuridicaDTO dto) {
-        PessoaJuridicaDTO pessoaJuridicaDTO = service.create(dto);
-        return ResponseEntity.status(201).body(pessoaJuridicaDTO);
+    public ResponseEntity<PessoaJuridica> savePessoaJuridica(@Valid @RequestBody PessoaJuridicaDTO dto) {
+        PessoaJuridica pessoaJuridica = dto.extractPessoaJuridica();
+
+        //PessoaJuridicaDTO pessoaJuridicaDTO = service.create(dto);
+        //return ResponseEntity.status(201).body(pessoaJuridicaDTO);
+
+        PessoaJuridica pj = service.create(pessoaJuridica);
+        return ResponseEntity.status(201).body(pj);
     }
 }

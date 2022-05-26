@@ -35,10 +35,14 @@ public class PessoaFisicaController {
     }
 
     @PostMapping
-    public ResponseEntity<PessoaFisicaDTO> savePessoaFisica(@Valid @RequestBody PessoaFisicaDTO dto) {
-        PessoaFisicaDTO pessoaFisicaDTO = service.create(dto);
-        return ResponseEntity.status(201).body(pessoaFisicaDTO);
-        //return pessoaFisicaDTO;
+    public ResponseEntity<PessoaFisica> savePessoaFisica(@Valid @RequestBody PessoaFisicaDTO dto) {
+        PessoaFisica pessoaFisica = dto.extractPessoaFisica();
+
+        //PessoaFisicaDTO pessoaFisicaDTO = service.create(dto);
+        //return ResponseEntity.status(201).body(pessoaFisicaDTO);
+
+        PessoaFisica pf = service.create(pessoaFisica);
+        return ResponseEntity.status(201).body(pf);
     }
 
 }

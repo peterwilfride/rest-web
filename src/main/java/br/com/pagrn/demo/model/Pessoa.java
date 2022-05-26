@@ -1,9 +1,7 @@
 package br.com.pagrn.demo.model;
 
 import br.com.pagrn.demo.model.generic.AbstractEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -14,7 +12,8 @@ import javax.validation.constraints.Size;
 @Entity(name = "pessoa")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa extends AbstractEntity {
 
@@ -31,5 +30,5 @@ public class Pessoa extends AbstractEntity {
 
     private String telefones;
 
-    private Boolean eh_pessoa_fisica;
+    //private Boolean eh_pessoa_fisica;
 }

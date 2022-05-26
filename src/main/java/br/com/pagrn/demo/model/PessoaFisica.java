@@ -64,5 +64,5 @@ public class PessoaFisica extends Pessoa {
     @JoinTable(name = "pessoasfisicas_deficiencias",
             joinColumns = { @JoinColumn(name = "pessoaFisica_id") },
             inverseJoinColumns = { @JoinColumn(name = "deficiencia_id") })
-    public List<Deficiencia> deficiencias;  // = new HashSet<>();
+    public List<Deficiencia> deficiencias;
 }

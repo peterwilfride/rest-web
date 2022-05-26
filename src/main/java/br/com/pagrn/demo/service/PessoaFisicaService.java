@@ -1,11 +1,8 @@
 package br.com.pagrn.demo.service;
 
 import br.com.pagrn.demo.dto.PessoaFisicaDTO;
-import br.com.pagrn.demo.model.Deficiencia;
 import br.com.pagrn.demo.model.Endereco;
 import br.com.pagrn.demo.model.PessoaFisica;
-import br.com.pagrn.demo.model.Servidor;
-import br.com.pagrn.demo.repository.DeficienciaRepository;
 import br.com.pagrn.demo.repository.EnderecoRepository;
 import br.com.pagrn.demo.repository.PessoaFisicaRepository;
 import br.com.pagrn.demo.repository.ServidorRepository;
@@ -15,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class PessoaFisicaService {
@@ -29,9 +25,6 @@ public class PessoaFisicaService {
     @Autowired
     private ServidorRepository servidorRepository;
 
-    @Autowired
-    private DeficienciaRepository deficienciaRepository;
-
     public List<PessoaFisica> findAll() {
         return pessoaFisicaRepository.findAll();
     }
@@ -40,7 +33,7 @@ public class PessoaFisicaService {
         return pessoaFisicaRepository.findById(id);
     }
 
-    @Transactional
+    /*@Transactional
     public PessoaFisicaDTO create(PessoaFisicaDTO dto) {
 
         PessoaFisica pessoaFisica = new PessoaFisica();
@@ -55,7 +48,7 @@ public class PessoaFisicaService {
         pessoaFisica.setNome(dto.getNome());
         pessoaFisica.setEmail(dto.getEmail());
         pessoaFisica.setTelefones(dto.getTelefones());
-        pessoaFisica.setEh_pessoa_fisica(dto.getEh_pessoa_fisica());
+        //pessoaFisica.setEh_pessoa_fisica(dto.getEh_pessoa_fisica());
 
         endereco.setLatitude(dto.getEndereco().getLatitude());
         endereco.setLongitude(dto.getEndereco().getLongitude());
@@ -73,32 +66,33 @@ public class PessoaFisicaService {
         pessoaFisica.setNome_mae(dto.getNome_mae());
         pessoaFisica.setFoto(dto.getFoto());
 
-        /*
-        List<Servidor> servidores = dto.getServidores();
-        for (Servidor s : servidores) {
-            Servidor servidor = new Servidor();
-            servidor.setMatricula(s.getMatricula());
-            servidor.setNome_social(s.getNome_social());
-            servidor.setPessoa_fisica_id(pessoaFisica);
-            servidor = servidorRepository.save(servidor);
-        }*/
         pessoaFisica.setServidores(dto.getServidores());
 
-        /*
-        List<Deficiencia> deficiencias = dto.getDeficiencias();
-        for (Deficiencia d : deficiencias) {
-            Deficiencia deficiencia = new Deficiencia();
-            deficiencia.setTipo(d.getTipo());
-            deficiencia.setDenominacao(d.getDenominacao());
-            //deficiencia.getPessoaFisicas().add(pessoaFisica);
-            deficiencia = deficienciaRepository.save(deficiencia);
-        }*/
         pessoaFisica.setDeficiencias(dto.getDeficiencias());
 
         pessoaFisica = pessoaFisicaRepository.save(pessoaFisica);
 
         return new PessoaFisicaDTO(pessoaFisica);
+    }*/
+
+    @Transactional
+    public PessoaFisica create(PessoaFisica pessoaFisica) {
+
+        Endereco pe = pessoaFisica.getEndereco();
+
+        Endereco endereco = enderecoRepository.findById(pe.getId()).orElse(null);
+
+        if (endereco == null) {
+            endereco = new Endereco();
+            endereco.setLatitude(pe.getLatitude());
+            endereco.setLongitude(pe.getLongitude());
+            endereco.setNumero(pe.getNumero());
+            endereco.setComplemento(pe.getComplemento());
+            endereco.setLogradouro(pe.getLogradouro());
+            endereco.setCep(pe.getCep());
+            pessoaFisica.setEndereco(endereco);
+        }
+
+        return pessoaFisicaRepository.save(pessoaFisica);
     }
-
-
 }

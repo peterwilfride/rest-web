@@ -15,7 +15,7 @@ public class PessoaJuridicaDTO {
     private String nome;
     private String email;
     private String telefones;
-    private Boolean eh_pessoa_fisica;
+    //private Boolean eh_pessoa_fisica;
     private Endereco endereco;
 
     private String cnpj;
@@ -26,10 +26,26 @@ public class PessoaJuridicaDTO {
         nome = pessoaJuridica.getNome();
         email = pessoaJuridica.getEmail();
         telefones = pessoaJuridica.getTelefones();
-        eh_pessoa_fisica = pessoaJuridica.getEh_pessoa_fisica();
+        //eh_pessoa_fisica = pessoaJuridica.getEh_pessoa_fisica();
         endereco = pessoaJuridica.getEndereco();
         cnpj = pessoaJuridica.getCnpj();
         razao_social = pessoaJuridica.getRazao_social();
+    }
+
+    public PessoaJuridica extractPessoaJuridica() {
+        PessoaJuridica pessoaJuridica = new PessoaJuridica();
+
+        pessoaJuridica.setNome(this.getNome());
+        pessoaJuridica.setEmail(this.getEmail());
+        pessoaJuridica.setTelefones(this.getTelefones());
+        pessoaJuridica.setEndereco(this.getEndereco());
+
+        pessoaJuridica.setEndereco(this.getEndereco());
+
+        pessoaJuridica.setCnpj(this.getCnpj());
+        pessoaJuridica.setRazao_social(this.getRazao_social());
+
+        return pessoaJuridica;
     }
 
 }
