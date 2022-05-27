@@ -1,5 +1,18 @@
-# rest-web
-RepositÃ³rio para guardar a API REST do DER do "pagRN"
+# Projeto
+
+- Desenvolver uma aplicação web utilizando o estilo arquitetural REST
+- A aplicação deve conter entidades com relacionamentos 1-1, 1-N e N-N
+- Desenvolver todos os endpoints do CRUD para cada recurso
+- Implementar um soft delete ou implementar um logger em nível de aplicação para qualquer procedimento relacionado ao banco de dados.
+- Utilizar verbos HTTP e status code da resposta de maneira adequada
+- Implementar a API em grau de maturidade REST nível 3.
+- Criar Data Transfer Objects para request/ response para criação/update/listagem de objetos
+- Criar endpoint para login 
+- Adicionar segurança em todos os demais end-points da aplicação utilizando uma estratégia STATELESS (JWT ou OAuth2.0)
+- Busca paginada
+- Tema: Pessoa (Física e Jurídica), Servidor, Endereço, Vínculo, Deficiência
+- Grupos de 2-3 pessoas
+
 
 # pendï¿½ncias
 [ ] Implementar entidade deficiente (vÃ¡rios / vÃ¡rios)
