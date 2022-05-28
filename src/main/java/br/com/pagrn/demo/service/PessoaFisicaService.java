@@ -32,11 +32,11 @@ public class PessoaFisicaService {
     private DeficienciaRepository deficienciaRepository;
 
     public Page<PessoaFisica> findAll(Pageable pageable) {
-        return pessoaFisicaRepository.findAll(pageable);
+        return pessoaFisicaRepository.findAllByRemoved(null, pageable);
     }
 
     public Optional<PessoaFisica> findById(Long id) {
-        return pessoaFisicaRepository.findById(id);
+        return pessoaFisicaRepository.findByIdAndRemoved(id, null);
     }
 
     /*@Transactional
@@ -96,6 +96,8 @@ public class PessoaFisicaService {
             endereco.setComplemento(pe.getComplemento());
             endereco.setLogradouro(pe.getLogradouro());
             endereco.setCep(pe.getCep());
+            pessoaFisica.setEndereco(endereco);
+        } else {
             pessoaFisica.setEndereco(endereco);
         }
 
