@@ -40,9 +40,19 @@ public class PessoaJuridicaController {
     @PostMapping
     public ResponseEntity<PessoaJuridica> savePessoaJuridica(@Valid @RequestBody PessoaJuridicaDTO dto) {
         PessoaJuridica pessoaJuridica = dto.extractPessoaJuridica();
-
         PessoaJuridica pj = service.create(pessoaJuridica);
         return ResponseEntity.status(201).body(pj);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<PessoaJuridica> update(@Valid @PathVariable Long id, @RequestBody PessoaJuridicaDTO dto){
+        PessoaJuridica pessoaJuridica = dto.extractPessoaJuridica();
+        pessoaJuridica.setId(id);
+        return service.findById(id)
+                .map( record -> {
+                    service.update(pessoaJuridica);
+                    return ResponseEntity.ok(pessoaJuridica);
+                }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(value = "/{id}")

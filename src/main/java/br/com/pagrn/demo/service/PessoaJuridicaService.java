@@ -64,4 +64,24 @@ public class PessoaJuridicaService {
         e.setRemoved(current_date);
         enderecoRepository.save(e);
     }
+
+    public void update(PessoaJuridica pessoaJuridica) {
+        Endereco pe = pessoaJuridica.getEndereco();
+
+        Endereco endereco = enderecoRepository.findById(pe.getId()).orElse(null);
+
+        if (endereco == null) {
+            endereco = new Endereco();
+        }
+
+        endereco.setLatitude(pe.getLatitude());
+        endereco.setLongitude(pe.getLongitude());
+        endereco.setNumero(pe.getNumero());
+        endereco.setComplemento(pe.getComplemento());
+        endereco.setLogradouro(pe.getLogradouro());
+        endereco.setCep(pe.getCep());
+        pessoaJuridica.setEndereco(endereco);
+
+        pessoaJuridicaRepository.save(pessoaJuridica);
+    }
 }
