@@ -27,7 +27,13 @@ public class DeficienciaService {
     }
 
     public void delete(Deficiencia deficiencia) {
+
+        // listar todas as pessoas fśicas do banco de dados
+        // verificar para cada deficiencia o id é igual o da definciencia desse método
+        // se sim, excluir a deficiência da lista
+        // senão ignora
+        // salva, para da pessoa física
+
         repository.delete(deficiencia);
-        // ainda tem que verificar se remove da tabela do join table
     }
 }
