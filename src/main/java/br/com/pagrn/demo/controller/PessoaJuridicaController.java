@@ -4,6 +4,9 @@ import br.com.pagrn.demo.dto.PessoaJuridicaDTO;
 import br.com.pagrn.demo.model.PessoaJuridica;
 import br.com.pagrn.demo.service.PessoaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +22,9 @@ public class PessoaJuridicaController {
     public PessoaJuridicaService service;
 
     @GetMapping
-    public ResponseEntity<List<PessoaJuridica>> listPessoasFisicas() {
-        List<PessoaJuridica> pessoaJuridicas = service.findAll();
-        return ResponseEntity.status(200).body(pessoaJuridicas);
+    @ResponseStatus(HttpStatus.OK)
+    public Page<PessoaJuridica> listPessoasFisicas(Pageable pegeable) {
+        return service.findAll(pegeable);
     }
 
     @GetMapping(value = "/{id}")
@@ -40,5 +43,15 @@ public class PessoaJuridicaController {
 
         PessoaJuridica pj = service.create(pessoaJuridica);
         return ResponseEntity.status(201).body(pj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deletePessoaJuridica(@PathVariable Long id) {
+        Optional<PessoaJuridica> pessoaJuridica = service.findById(id);
+        return service.findById(id)
+                .map( record -> {
+                    service.delete(record);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
     }
 }
